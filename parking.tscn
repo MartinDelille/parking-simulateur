@@ -1,0 +1,138 @@
+[gd_scene format=3 uid="uid://uu3ijt01dds1"]
+
+[ext_resource type="PackedScene" path="res://car.tscn" id="1"]
+[ext_resource type="PackedScene" path="res://player_car.tscn" id="2"]
+[ext_resource type="Script" path="res://camera_follow.gd" id="3"]
+
+[sub_resource type="StandardMaterial3D" id="1"]
+albedo_color = Color(0.8, 0.2, 0.2, 1)
+
+[sub_resource type="StandardMaterial3D" id="2"]
+albedo_color = Color(0.2, 0.5, 0.8, 1)
+
+[sub_resource type="StandardMaterial3D" id="3"]
+albedo_color = Color(0.2, 0.7, 0.3, 1)
+
+[sub_resource type="StandardMaterial3D" id="7"]
+albedo_color = Color(0.1, 0.1, 0.1, 1)
+
+[sub_resource type="StandardMaterial3D" id="8"]
+albedo_color = Color(1, 1, 1, 1)
+
+[node name="root5" type="Node3D" unique_id=2129296384]
+
+[node name="DirectionalLight3D" type="DirectionalLight3D" parent="." unique_id=238923871]
+transform = Transform3D(0.87, -0.3, 0.4, 0, 0.8, 0.6, -0.5, -0.52, 0.7, 0, 10, 0)
+shadow_enabled = true
+
+[node name="Ground" type="CSGBox3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.05, 0)
+size = Vector3(50, 0.1, 50)
+material = SubResource("7")
+
+[node name="Lane1" type="CSGBox3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -7.5, 0.01, 0)
+size = Vector3(0.15, 0.02, 30)
+material = SubResource("8")
+
+[node name="Lane2" type="CSGBox3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -2.5, 0.01, 0)
+size = Vector3(0.15, 0.02, 30)
+material = SubResource("8")
+
+[node name="Lane3" type="CSGBox3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2.5, 0.01, 0)
+size = Vector3(0.15, 0.02, 30)
+material = SubResource("8")
+
+[node name="Lane4" type="CSGBox3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 7.5, 0.01, 0)
+size = Vector3(0.15, 0.02, 30)
+material = SubResource("8")
+
+[node name="SpotLine1" type="CSGBox3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -5, 0.01, -5)
+size = Vector3(5, 0.02, 0.15)
+material = SubResource("8")
+
+[node name="SpotLine2" type="CSGBox3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -5, 0.01, 0)
+size = Vector3(5, 0.02, 0.15)
+material = SubResource("8")
+
+[node name="SpotLine3" type="CSGBox3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -5, 0.01, 5)
+size = Vector3(5, 0.02, 0.15)
+material = SubResource("8")
+
+[node name="SpotLine4" type="CSGBox3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.01, -5)
+size = Vector3(5, 0.02, 0.15)
+material = SubResource("8")
+
+[node name="SpotLine5" type="CSGBox3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.01, 0)
+size = Vector3(5, 0.02, 0.15)
+material = SubResource("8")
+
+[node name="SpotLine6" type="CSGBox3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.01, 5)
+size = Vector3(5, 0.02, 0.15)
+material = SubResource("8")
+
+[node name="SpotLine7" type="CSGBox3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 5, 0.01, -5)
+size = Vector3(5, 0.02, 0.15)
+material = SubResource("8")
+
+[node name="SpotLine8" type="CSGBox3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 5, 0.01, 0)
+size = Vector3(5, 0.02, 0.15)
+material = SubResource("8")
+
+[node name="SpotLine9" type="CSGBox3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 5, 0.01, 5)
+size = Vector3(5, 0.02, 0.15)
+material = SubResource("8")
+
+[node name="PlayerCar" parent="." instance=ExtResource("2")]
+
+[node name="Body" parent="PlayerCar" index="0"]
+material = SubResource("1")
+
+[node name="Cabin" parent="PlayerCar" index="1"]
+material = SubResource("1")
+
+[node name="CameraRig" type="Node3D" parent="."]
+script = ExtResource("3")
+target_path = NodePath("../PlayerCar")
+
+[node name="Yaw" type="Node3D" parent="CameraRig"]
+transform = Transform3D(0.73016226, 0, -0.6832738, 0, 1, 0, 0.6832738, 0, 0.73016226, 0, 0, 0)
+
+[node name="Pitch" type="Node3D" parent="CameraRig/Yaw"]
+transform = Transform3D(1, 0, 0, 0, 0.8660254, 0.5, 0, -0.5, 0.8660254, 0, 0, 0)
+
+[node name="Camera3D" type="Camera3D" parent="CameraRig/Yaw/Pitch"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 16.96)
+projection = 1
+size = 18.86
+near = 0.017
+
+[node name="Car2" parent="." instance=ExtResource("1")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 5, 0, 0)
+
+[node name="Body" parent="Car2" index="0"]
+material = SubResource("2")
+
+[node name="Cabin" parent="Car2" index="1"]
+material = SubResource("2")
+
+[node name="Car3" parent="." instance=ExtResource("1")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -5, 0, 0)
+
+[node name="Body" parent="Car3" index="0"]
+material = SubResource("3")
+
+[node name="Cabin" parent="Car3" index="1"]
+material = SubResource("3")
